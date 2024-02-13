@@ -29,7 +29,7 @@ class PersonnelController extends BaseController
         $personnel = Personnel::findOrFail($personnelId);
         $product = $this->personnelProductService->getProduct($personnel);
 
-        return response()->json($product);
+        return  $this->sendResponse($product, 'Product personnel responsible for retrieved successfully.');
     }
 
     /**

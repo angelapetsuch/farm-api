@@ -29,7 +29,7 @@ class ProductController extends BaseController
         $product = Product::findOrFail($productId);
         $requiredTools = $this->productToolService->getRequiredTools($product);
 
-        return response()->json($requiredTools);
+        return $this->sendResponse($requiredTools, 'Tools required for product retrieved successfully.');
     }
     /**
      * Display a listing of the resource.
@@ -76,15 +76,14 @@ class ProductController extends BaseController
      */
     public function show($id)
     {
-        $product = Product::find($id);
+        $product = Product::with('tools')->find($id);
 
         if (is_null($product)) {
             return $this->sendError('Product not found.');
         }
 
-        $requiredTools = $product->tools;
-        echo $requiredTools;
-
+        // $requiredTools = $product->tools;
+        // echo $requiredTools;
 
         return $this->sendResponse(new ProductResource($product), 'Product retrieved successfully.');
     }

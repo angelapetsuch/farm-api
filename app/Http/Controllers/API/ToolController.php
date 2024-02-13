@@ -52,14 +52,11 @@ class ToolController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Tool $tool)
     {
-        $tool = Tool::find($id);
-
-        if (is_null($tool)) {
+        if (!$tool->exists) {
             return $this->sendError('Tool not found.');
         }
-
         return $this->sendResponse(new ToolResource($tool), 'Tool retrieved successfully.');
     }
 

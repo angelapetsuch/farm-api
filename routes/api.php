@@ -24,21 +24,13 @@ Route::post('login', [RegisterController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group( function () {
     Route::apiResource('products', ProductController::class);
-});
 
-Route::middleware('auth:sanctum')->group( function () {
     Route::apiResource('tools', ToolController::class);
-});
 
-Route::middleware('auth:sanctum')->group( function () {
     Route::apiResource('personnel', PersonnelController::class);
-});
 
-Route::middleware('auth:sanctum')->group( function () {
     Route::get('/products/{productId}/required-tools', [ProductController::class, 'getRequiredTools']);
-});
 
-Route::middleware('auth:sanctum')->group( function () {
     Route::get('/personnel/{personnelId}/product', [PersonnelController::class, 'getProduct']);
 });
 
